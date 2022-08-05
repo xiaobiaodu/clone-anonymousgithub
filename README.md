@@ -3,8 +3,8 @@
 clone / download repositories from anonymous.4open.science
 
 ```
-git clone https://github.com/kynehc/clone_anonymous_github.git
-cd clone_anonymous_github
+git clone https://github.com/echosum/clone-anonymousgithub.git
+cd clone-anonymousgithub
 python download.py --url anonymous-root-url --dir savepath/
 ```
 

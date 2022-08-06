@@ -8,7 +8,7 @@ def parse_args():
     parser = argparse.ArgumentParser(description='Clone from the https://anonymous.4open.science')
     parser.add_argument('--dir', type=str, default='master',
                         help='save dir')
-    parser.add_argument('--url', type=str,
+    parser.add_argument('--url', type=str,default='https://anonymous.4open.science/r/PMN-1806/',
                         help='target anonymous github link eg., https://anonymous.4open.science/r/840c8c57-3c32-451e-bf12-0e20be300389/')
     parser.add_argument('--max-conns', type=int, default=128,
                         help='max connections number')
@@ -78,7 +78,9 @@ if __name__ == '__main__':
         save_path = os.path.join(args.dir, file_path)
         file_url = dl_url + file_path
         files.append((file_url, save_path))
-    
+
+        if not os.path.exists(os.path.dirname(save_path)):
+            os.makedirs(os.path.dirname(save_path))
     with concurrent.futures.ThreadPoolExecutor(max_workers=max_conns) as executor:
         future_to_url = (executor.submit(req_url, dl_file) for dl_file in files)
         for future in concurrent.futures.as_completed(future_to_url):
